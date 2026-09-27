@@ -3,7 +3,7 @@ import os
 import sys
 from pathlib import Path
 
-project_home = Path("/home/CounterStrikeStat/cs2-stat-tracker")
+project_home = Path.home() / "cs2-stat-tracker"
 if not (project_home / "manage.py").is_file():
     raise RuntimeError(f"Django project not found: {project_home}")
 
