@@ -5,7 +5,7 @@
   <div class="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
     <h1 class="mb-2 text-3xl font-bold">ค้นหาโปรไฟล์ผู้เล่น</h1>
     <p class="mb-6 text-sm text-slate-400">ใช้ Steam64 ID, Steam URL หรือชื่อ Vanity ที่เป็นส่วนหนึ่งของ URL Steam</p>
-    <form method="post" action="{% url 'profile' %}" hx-post="{% url 'profile' %}" hx-target="#profile-result" hx-swap="innerHTML" hx-indicator="#search-status" class="flex flex-col gap-3 sm:flex-row sm:items-end">{% csrf_token %}
+    <form method="post" action="{% url 'profile' %}" hx-post="{% url 'profile' %}" hx-target="#profile-result" hx-swap="innerHTML" hx-indicator="#search-status" data-leetify-browser-form="profile" class="flex flex-col gap-3 sm:flex-row sm:items-end">{% csrf_token %}
       <div class="flex-1"><label for="{{ form.query.id_for_label }}" class="mb-1 block text-sm text-slate-300">{{ form.query.label }}</label>{{ form.query }}{% for error in form.query.errors %}<p class="mt-1 text-sm text-rose-300">{{ error }}</p>{% endfor %}</div>
       <button class="rounded-lg bg-amber-400 px-6 py-2 font-bold text-slate-950 hover:bg-amber-300">ค้นหา</button>
     </form>

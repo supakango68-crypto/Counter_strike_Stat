@@ -1,9 +1,10 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
-from leetify_client import LeetifyError, get_match_history, get_player_data
+from leetify_client import LeetifyError, get_match_history, get_player_data, resolve_steam64
 
 from .forms import CompareForm, MatchSearchForm, NoteForm, PlayerSearchForm, RegisterForm
 from .models import SearchHistory
@@ -103,3 +104,27 @@ def delete_history(request, pk):
     record = get_object_or_404(SearchHistory, pk=pk, user=request.user)
     record.delete()
     return redirect("history")
+
+
+@require_POST
+@login_required
+def resolve_steam(request):
+    query = request.POST.get("query", "").strip()
+    if not query or len(query) > 200:
+        return JsonResponse({"error": "กรุณาระบุคำค้นที่ไม่เกิน 200 ตัวอักษร"}, status=400)
+
+    steam64_id = resolve_steam64(query)
+    if not steam64_id:
+        return JsonResponse({"error": "ไม่พบ Steam64 ID จากคำค้นนี้"}, status=404)
+    return JsonResponse({"steam64_id": steam64_id})
+
+
+@require_POST
+@login_required
+def record_search(request):
+    query = request.POST.get("query", "").strip()
+    if not query or len(query) > 200:
+        return JsonResponse({"error": "กรุณาระบุคำค้นที่ไม่เกิน 200 ตัวอักษร"}, status=400)
+
+    SearchHistory.objects.create(user=request.user, query=query)
+    return JsonResponse({"ok": True})

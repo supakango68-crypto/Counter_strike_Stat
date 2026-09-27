@@ -12,7 +12,7 @@
   <script defer src="{% static 'app.js' %}"></script>
   <style>[x-cloak]{display:none!important}</style>
 </head>
-<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased" data-leetify-api-base="https://api-public.cs-prod.leetify.com">
   <header class="border-b border-white/10 bg-slate-900/90">
     <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4" aria-label="เมนูหลัก">
       <a href="{% url 'index' %}" class="text-xl font-extrabold tracking-tight text-amber-400">CS2 <span class="text-white">Stat Tracker</span></a>
@@ -23,6 +23,9 @@
           <a href="{% url 'compare' %}" class="rounded-lg px-3 py-2 hover:bg-white/10">เปรียบเทียบ</a>
           <a href="{% url 'history' %}" class="rounded-lg px-3 py-2 hover:bg-white/10">ประวัติ</a>
           <span class="px-2 text-slate-400">{{ user.username }}</span>
+          <label class="sr-only" for="leetify-api-key">Leetify API key สำหรับเดโม</label>
+          <input id="leetify-api-key" type="password" autocomplete="off" placeholder="Leetify API key" class="w-36 rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-xs text-white placeholder-white/40 focus:border-amber-400 focus:outline-none" aria-describedby="leetify-key-help">
+          <span id="leetify-key-help" class="sr-only">เก็บไว้เฉพาะ session ของเบราว์เซอร์นี้ และไม่ส่งให้ Django</span>
           <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="rounded-lg border border-rose-500/40 px-3 py-2 text-rose-300 hover:bg-rose-500/10">ออกจากระบบ</button></form>
         {% else %}
           <a href="{% url 'login' %}" class="rounded-lg px-3 py-2 hover:bg-white/10">เข้าสู่ระบบ</a>

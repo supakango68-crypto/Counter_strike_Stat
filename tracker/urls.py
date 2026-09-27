@@ -13,6 +13,8 @@ urlpatterns = [
     path("matches/", views.matches, name="matches"),
     path("compare/", views.compare, name="compare"),
     path("history/", views.history, name="history"),
+    path("api/resolve-steam/", views.resolve_steam, name="resolve_steam"),
+    path("api/search-history/", views.record_search, name="record_search"),
     path("history/<int:pk>/edit/", views.edit_history, name="history_edit"),
     path("history/<int:pk>/delete/", views.delete_history, name="history_delete"),
 ]
