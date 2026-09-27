@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}โปรไฟล์ผู้เล่น · CS2 Stat Tracker{% endblock %}
+{% block content %}
+<div class="mx-auto max-w-4xl space-y-6">
+  <div class="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+    <h1 class="mb-2 text-3xl font-bold">ค้นหาโปรไฟล์ผู้เล่น</h1>
+    <p class="mb-6 text-sm text-slate-400">ใช้ Steam64 ID, Steam URL หรือชื่อ Vanity ที่เป็นส่วนหนึ่งของ URL Steam</p>
+    <form method="post" action="{% url 'profile' %}" hx-post="{% url 'profile' %}" hx-target="#profile-result" hx-swap="innerHTML" hx-indicator="#search-status" class="flex flex-col gap-3 sm:flex-row sm:items-end">{% csrf_token %}
+      <div class="flex-1"><label for="{{ form.query.id_for_label }}" class="mb-1 block text-sm text-slate-300">{{ form.query.label }}</label>{{ form.query }}{% for error in form.query.errors %}<p class="mt-1 text-sm text-rose-300">{{ error }}</p>{% endfor %}</div>
+      <button class="rounded-lg bg-amber-400 px-6 py-2 font-bold text-slate-950 hover:bg-amber-300">ค้นหา</button>
+    </form>
+    <p id="search-status" class="htmx-indicator mt-3 text-sm text-amber-300" role="status">กำลังค้นหา...</p>
+  </div>
+  <div id="profile-result" aria-live="polite">{% include 'partials/profile_result.html' %}</div>
+  {% if recent %}<section class="rounded-2xl border border-white/10 bg-white/5 p-6"><h2 class="mb-3 text-xl font-bold">ค้นหาล่าสุด</h2><div class="flex flex-wrap gap-2">{% for item in recent %}<span class="rounded-full bg-white/10 px-3 py-1 text-sm text-slate-300">{{ item.query }}</span>{% endfor %}</div><a href="{% url 'history' %}" class="mt-4 inline-block text-sm text-amber-400 hover:underline">จัดการประวัติทั้งหมด →</a></section>{% endif %}
+</div>
+{% endblock %}

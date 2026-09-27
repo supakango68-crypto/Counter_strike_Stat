@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}แก้บันทึก · CS2 Stat Tracker{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-lg rounded-2xl border border-white/10 bg-white/5 p-7"><h1 class="text-2xl font-bold">แก้บันทึก: {{ record.query }}</h1><form method="post" class="mt-6 space-y-4">{% csrf_token %}<div><label for="{{ form.note.id_for_label }}" class="mb-1 block text-sm text-slate-300">{{ form.note.label }}</label>{{ form.note }}{% for error in form.note.errors %}<p class="text-sm text-rose-300">{{ error }}</p>{% endfor %}</div><div class="flex gap-3"><button class="rounded-lg bg-amber-400 px-4 py-2 font-bold text-slate-950 hover:bg-amber-300">บันทึก</button><a href="{% url 'history' %}" class="rounded-lg border border-white/20 px-4 py-2">ยกเลิก</a></div></form></section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}สมัครสมาชิก · CS2 Stat Tracker{% endblock %}
+{% block content %}
+<section class="mx-auto max-w-md rounded-2xl border border-white/10 bg-white/5 p-7">
+  <h1 class="mb-6 text-3xl font-bold">สมัครสมาชิก</h1>
+  <form method="post" class="space-y-4">{% csrf_token %}
+    {% for field in form %}<div><label for="{{ field.id_for_label }}" class="mb-1 block text-sm text-slate-300">{{ field.label }}</label>{{ field }}{% if field.help_text %}<p class="mt-1 text-xs text-slate-500">{{ field.help_text }}</p>{% endif %}{% for error in field.errors %}<p class="mt-1 text-sm text-rose-300">{{ error }}</p>{% endfor %}</div>{% endfor %}
+    <button class="w-full rounded-lg bg-amber-400 px-4 py-2 font-bold text-slate-950 hover:bg-amber-300">สร้างบัญชี</button>
+  </form>
+  <p class="mt-5 text-sm text-slate-400">มีบัญชีแล้ว? <a href="{% url 'login' %}" class="text-amber-400 hover:underline">เข้าสู่ระบบ</a></p>
+</section>
+{% endblock %}

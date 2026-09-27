@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="mb-10 max-w-3xl">
+  <p class="mb-3 text-sm font-bold uppercase tracking-[.25em] text-amber-400">CS2 Stats</p>
+  <h1 class="text-4xl font-extrabold leading-tight sm:text-6xl">สถิติผู้เล่นที่อ่านง่าย<br><span class="text-amber-400">ในที่เดียว</span></h1>
+  <p class="mt-5 text-lg text-slate-400">ค้นหาโปรไฟล์ ดูแมตช์ล่าสุด และเปรียบเทียบผู้เล่นด้วยข้อมูลจาก Leetify</p>
+  {% if not user.is_authenticated %}<a href="{% url 'register' %}" class="mt-7 inline-block rounded-xl bg-amber-400 px-6 py-3 font-bold text-slate-950 hover:bg-amber-300">เริ่มใช้งาน</a>{% endif %}
+</section>
+<div class="grid gap-5 md:grid-cols-3">
+  <a href="{% url 'profile' %}" class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-amber-400/60 hover:bg-white/10"><span class="text-3xl">🎯</span><h2 class="mt-4 text-xl font-bold">โปรไฟล์ผู้เล่น</h2><p class="mt-2 text-sm text-slate-400">ดูอัตราชนะ อันดับ และคะแนนทักษะ</p></a>
+  <a href="{% url 'matches' %}" class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-amber-400/60 hover:bg-white/10"><span class="text-3xl">📊</span><h2 class="mt-4 text-xl font-bold">ประวัติแมตช์</h2><p class="mt-2 text-sm text-slate-400">ดูแผนที่ ผลการแข่งขัน และสกอร์</p></a>
+  <a href="{% url 'compare' %}" class="rounded-2xl border border-white/10 bg-white/5 p-6 transition hover:border-amber-400/60 hover:bg-white/10"><span class="text-3xl">⚔️</span><h2 class="mt-4 text-xl font-bold">เปรียบเทียบ</h2><p class="mt-2 text-sm text-slate-400">เทียบสถิติผู้เล่นสองคนแบบเคียงกัน</p></a>
+</div>
+{% endblock %}

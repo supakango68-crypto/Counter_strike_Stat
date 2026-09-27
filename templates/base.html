@@ -1,0 +1,37 @@
+{% load static %}
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+  <title>{% block title %}CS2 Stat Tracker{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'output.css' %}">
+  <script defer src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script defer src="{% static 'app.js' %}"></script>
+  <style>[x-cloak]{display:none!important}</style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 antialiased">
+  <header class="border-b border-white/10 bg-slate-900/90">
+    <nav class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4" aria-label="เมนูหลัก">
+      <a href="{% url 'index' %}" class="text-xl font-extrabold tracking-tight text-amber-400">CS2 <span class="text-white">Stat Tracker</span></a>
+      <div class="flex flex-wrap items-center gap-2 text-sm">
+        {% if user.is_authenticated %}
+          <a href="{% url 'profile' %}" class="rounded-lg px-3 py-2 hover:bg-white/10">โปรไฟล์</a>
+          <a href="{% url 'matches' %}" class="rounded-lg px-3 py-2 hover:bg-white/10">แมตช์</a>
+          <a href="{% url 'compare' %}" class="rounded-lg px-3 py-2 hover:bg-white/10">เปรียบเทียบ</a>
+          <a href="{% url 'history' %}" class="rounded-lg px-3 py-2 hover:bg-white/10">ประวัติ</a>
+          <span class="px-2 text-slate-400">{{ user.username }}</span>
+          <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="rounded-lg border border-rose-500/40 px-3 py-2 text-rose-300 hover:bg-rose-500/10">ออกจากระบบ</button></form>
+        {% else %}
+          <a href="{% url 'login' %}" class="rounded-lg px-3 py-2 hover:bg-white/10">เข้าสู่ระบบ</a>
+          <a href="{% url 'register' %}" class="rounded-lg bg-amber-400 px-3 py-2 font-semibold text-slate-950 hover:bg-amber-300">สมัครสมาชิก</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+  <main class="mx-auto min-h-[calc(100vh-9rem)] max-w-6xl px-4 py-10">{% block content %}{% endblock %}</main>
+  <footer class="flex flex-col items-center gap-2 border-t border-white/10 px-4 py-6 text-center text-sm text-slate-500"><span>CS2 Stat Tracker · เว็บอิสระ</span><a href="https://leetify.com/" target="_blank" rel="noopener noreferrer"><img src="{% static 'leetify-badge.png' %}" alt="Data Provided by Leetify" width="270" height="115" class="h-14 w-auto"></a></footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "api_cs2_stats",
+  "version": "1.0.0",
+  "scripts": {
+    "build-css": "tailwindcss -i ./static/input.css -o ./static/output.css --watch",
+    "build": "tailwindcss -i ./static/input.css -o ./static/output.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"
+  }
+}
