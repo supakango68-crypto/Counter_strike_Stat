@@ -1,9 +1,9 @@
-"""Paste into /var/www/cs2ttracker_pythonanywhere_com_wsgi.py on PythonAnywhere."""
+"""Paste into /var/www/counterstrikestat_pythonanywhere_com_wsgi.py."""
 import os
 import sys
 from pathlib import Path
 
-project_home = Path("/home/cs2ttracker/cs2-stat-tracker")
+project_home = Path("/home/CounterStrikeStat/cs2-stat-tracker")
 if not (project_home / "manage.py").is_file():
     raise RuntimeError(f"Django project not found: {project_home}")
 
